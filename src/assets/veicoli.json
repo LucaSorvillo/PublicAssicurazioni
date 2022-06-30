@@ -1,0 +1,26 @@
+[
+    {
+        "id": 1,
+        "tipo": "veicolo_autovettura",
+        
+        "targa": "AA-AA-AA",
+        "marca": "Fiat",
+        "modello": "Punto",
+        
+        "idPolizza": 1
+    },
+    
+    {
+        "id": 11,
+        "tipo": "veicolo_ciclomotore",
+        
+        "targa": "BA-AA-AA",
+        "marca": "Yamaha",
+        "modello": "YZF-R6",
+        
+        "idPolizza": 1
+    }
+    
+    
+    
+]

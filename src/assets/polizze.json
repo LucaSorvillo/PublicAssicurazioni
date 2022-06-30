@@ -1,0 +1,74 @@
+[
+    {
+        "id": 1,
+        "tipo": "polizza_auto",
+        
+        "polizza": "5476578364875",
+        "compagnia": "Allianz",
+        "premio": 5245.99,
+        "scadenza": "23/10/2022",
+        
+        "idCliente": 1
+    },
+    
+    {
+        "id": 11,
+        "tipo": "polizza_auto",
+        
+        "polizza": "6476578364875",
+        "compagnia": "Allianz",
+        "premio": 6245.99,
+        "scadenza": "04/12/2022",
+        
+        "idCliente": 1
+    },
+    
+    {
+        "id": 2,
+        "tipo": "polizza_auto",
+        
+        "polizza": "7537465786364",
+        "compagnia": "Allianz",
+        "premio": 35765635.99,
+        "scadenza": "15/04/2022",
+        
+        "idCliente": 2
+    },
+    
+    {
+        "id": 3,
+        "tipo": "polizza_auto",
+        
+        "polizza": "3562784657365",
+        "compagnia": "Allianz",
+        "premio": 3245.99,
+        "scadenza": "06/06/2022",
+        
+        "idCliente": 3
+    },
+    
+    {
+        "id": 4,
+        "tipo": "azienda",
+                
+        "polizza": "3567465786364",
+        "compagnia": "Sara",
+        "premio": 53435.99,
+        "scadenza": "22/12/2022",
+        
+        "idCliente": 4
+    },
+    
+    {
+        "id": 5,
+        "tipo": "persona",
+        
+        "polizza": "7543874578364",
+        "compagnia": "Sara",
+        "premio": 4535.99,
+        "scadenza": "01/07/2022",
+        
+        "idCliente": 5
+    }
+    
+]
