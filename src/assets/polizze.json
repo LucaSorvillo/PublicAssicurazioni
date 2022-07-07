@@ -1,4 +1,7 @@
 [
+    
+    
+    
     {
         "id": 1,
         "tipo": "polizza_auto",
@@ -10,7 +13,6 @@
         
         "idCliente": 1
     },
-    
     {
         "id": 11,
         "tipo": "polizza_auto",
@@ -21,19 +23,40 @@
         "scadenza": "04/12/2022",
         
         "idCliente": 1
-    },
+    }
+    
+    
+    ,
+    
+    
     
     {
         "id": 2,
         "tipo": "polizza_auto",
         
         "polizza": "7537465786364",
-        "compagnia": "Allianz",
+        "compagnia": "Sara",
         "premio": 35765635.99,
         "scadenza": "15/04/2022",
         
         "idCliente": 2
     },
+    {
+        "id": 22,
+        "tipo": "polizza_auto",
+        
+        "polizza": "434355334",
+        "compagnia": "Sara",
+        "premio": 4354.99,
+        "scadenza": "23/07/2022",
+        
+        "idCliente": 2
+    }
+    
+    
+    ,
+    
+    
     
     {
         "id": 3,
@@ -46,29 +69,75 @@
         
         "idCliente": 3
     },
+    {
+        "id": 33,
+        "tipo": "polizza_auto",
+        
+        "polizza": "4735748365843",
+        "compagnia": "Generali",
+        "premio": 324634.99,
+        "scadenza": "31/05/2023",
+        
+        "idCliente": 3
+    }
+    
+    
+    ,
+    
+    
     
     {
         "id": 4,
-        "tipo": "azienda",
+        "tipo": "polizza_auto",
                 
-        "polizza": "3567465786364",
-        "compagnia": "Sara",
+        "polizza": "1721872678",
+        "compagnia": "Generali",
         "premio": 53435.99,
         "scadenza": "22/12/2022",
         
         "idCliente": 4
     },
+    {
+        "id": 44,
+        "tipo": "polizza_auto",
+                
+        "polizza": "273648263",
+        "compagnia": "Generali",
+        "premio": 425234.99,
+        "scadenza": "20/11/2024",
+        
+        "idCliente": 4
+    }
+    
+    
+    ,
+    
+    
     
     {
         "id": 5,
-        "tipo": "persona",
+        "tipo": "polizza_auto",
         
-        "polizza": "7543874578364",
+        "polizza": "58675498757",
         "compagnia": "Sara",
         "premio": 4535.99,
         "scadenza": "01/07/2022",
         
         "idCliente": 5
+    },
+    {
+        "id": 55,
+        "tipo": "polizza_auto",
+        
+        "polizza": "5768436543",
+        "compagnia": "Allianz",
+        "premio": 34345.99,
+        "scadenza": "09/01/2025",
+        
+        "idCliente": 5
     }
+    
+    
+    
     
 ]

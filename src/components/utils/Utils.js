@@ -34,7 +34,8 @@ Utils.tipo = {
     VEICOLO_CICLOMOTORE: "veicolo_ciclomotore",
     VEICOLO_AUTOCARRO: "veicolo_ciclomotore",
     POLIZZA_AUTO: "polizza_auto",
-    POLIZZA_VITA: "polizza_vita"
+    POLIZZA_VITA: "polizza_vita",
+    POLIZZA_PREVIDENZA: "polizza_previdenza"
 };
 
 Utils.Columns = {
@@ -192,6 +193,14 @@ Utils.getImageByTipo = function (tipo, size) {
             return size ? imgPersonaBig : imgPersonaSmall;
         case Utils.tipo.CLIENTE_AZIENDA:
             return size ? imgAziendaBig : imgAziendaSmall;
+            
+            case Utils.tipo.POLIZZA_AUTO:
+                return size ? imgCiclomotoreBig : imgCiclomotoreSmall;
+            case Utils.tipo.POLIZZA_VITA:
+                return size ? imgCiclomotoreBig : imgCiclomotoreSmall;
+            case Utils.tipo.POLIZZA_PREVIDENZA:
+                return size ? imgCiclomotoreBig : imgCiclomotoreSmall;
+                
         case Utils.tipo.VEICOLO_AUTOVETTURA:
             return size ? imgAutovetturaBig : imgAutovetturaSmall;
         case Utils.tipo.VEICOLO_CICLOMOTORE:
