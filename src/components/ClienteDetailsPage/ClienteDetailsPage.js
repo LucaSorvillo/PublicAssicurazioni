@@ -26,14 +26,33 @@ const ClienteDetailsPage = () => {
     const [polizze, setPolizze] = useState([]);
     const [veicoli, setVeicoli] = useState([]);
 
-    // Mock Fetch (CLIENTI + POLIZZE)
     useEffect(() => {
         (async () => {
+            
             if (!id || !clientiJSON || !polizzeJSON) {
                 return;
             }
+            
+            // MOCK (CLIENTI + POLIZZE)
             const retrievedCliente = await clientiJSON.find(cliente => id === ("" + cliente.id));
             const retrievedPolizze = await polizzeJSON.filter(polizza => retrievedCliente.id === polizza.idCliente);
+            
+            // FETCH LOCAL SPRING BOOT REST API
+            // try {
+            //     // fetch data
+            //     const response = await fetch(`http://localhost:8080/api/v1/spring-project/heets/findAll`);
+            //     // 404 means empty list
+            //     if (response.status === 404) {
+            //         setHeetsList([]);
+            //         return;
+            //     }
+            //     const data = await response.json();
+            //     setHeetsList(data);
+            // }
+            // // error: server api offline (net::ERR_CONNECTION_REFUSED)
+            // catch (error) {
+            //     setError("Impossibile caricare i dati.");
+            // }
             setCliente(retrievedCliente);
             setPolizze(retrievedPolizze);
         })();
