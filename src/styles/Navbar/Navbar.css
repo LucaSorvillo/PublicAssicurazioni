@@ -65,7 +65,8 @@
     display: none;
 }
 
-/* Smartphone */
+
+/* -------------- SMARTPHONE -------------- */
 @media screen and (max-width: 960px) {
     .NavbarItems {
         position: relative;
@@ -150,7 +151,7 @@
 
 }
 
-/* -------------- BUTTON -------------- */
+/* -------------- VIOLET BUTTON DESKTOP (Discord) -------------- */
 .btn {
     --primary: #5865F2;
     margin-right: 20px;

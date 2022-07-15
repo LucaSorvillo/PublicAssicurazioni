@@ -3,8 +3,10 @@ import { React, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
 // Components
-import ClienteInfo from "components/ClienteDetailsPage/ClienteInfo";
-import PolizzaTable from "components/ClienteDetailsPage/PolizzaTable";
+import ClienteDetailsPageInfo from "components/ClienteDetailsPage/ClienteDetailsPageInfo";
+import ClienteDetailsPageTablePolizzeAuto from "components/ClienteDetailsPage/ClienteDetailsPageTablePolizzeAuto";
+import ClienteDetailsPageTablePolizzePrevidenza from "components/ClienteDetailsPage/ClienteDetailsPageTablePolizzePrevidenza";
+import ClienteDetailsPageTablePolizzeVita from "components/ClienteDetailsPage/ClienteDetailsPageTablePolizzeVita";
 
 // Libraries
 import Utils from "components/utils/Utils";
@@ -18,24 +20,48 @@ import clientiJSON from "assets/clienti.json";
 import polizzeJSON from "assets/polizze.json";
 import veicoliJSON from "assets/veicoli.json";
 
-
+// Route: /clienti/:idCliente
 const ClienteDetailsPage = () => {
 
-    const { id } = useParams();
+    const { idCliente } = useParams();
     const [cliente, setCliente] = useState(null);
-    const [polizze, setPolizze] = useState([]);
+    const [polizzeAuto, setPolizzeAuto] = useState([]);
+    const [polizzePrevidenza, setPolizzePrevidenza] = useState([]);
+    const [polizzeVita, setPolizzeVita] = useState([]);
     const [veicoli, setVeicoli] = useState([]);
 
     useEffect(() => {
         (async () => {
             
-            if (!id || !clientiJSON || !polizzeJSON) {
+            if (!idCliente || !clientiJSON || !polizzeJSON || !veicoliJSON) {
                 return;
             }
             
-            // MOCK (CLIENTI + POLIZZE)
-            const retrievedCliente = await clientiJSON.find(cliente => id === ("" + cliente.id));
-            const retrievedPolizze = await polizzeJSON.filter(polizza => retrievedCliente.id === polizza.idCliente);
+            // MOCK
+            // retrieve cliente
+            const retrievedCliente = await clientiJSON.find((cliente) => {
+                return (cliente.id + "") === idCliente;
+            });
+            // retrieve all polizze of cliente
+            const retrievedPolizze = await polizzeJSON.filter((polizza) => {
+                return polizza.idCliente === retrievedCliente.id;
+            });
+            // retrieve polizze auto
+            const retrievedPolizzeAuto = await retrievedPolizze.filter((polizza) => {
+                return polizza.tipo === "polizza_auto";
+            });
+            // retrieve polizze previdenza
+            const retrievedPolizzePrevidenza = await retrievedPolizze.filter((polizza) => {
+                return polizza.tipo === "polizza_previdenza";
+            });
+            // retrieve polizze vita
+            const retrievedPolizzeVita = await retrievedPolizze.filter((polizza) => {
+                return polizza.tipo === "polizza_vita";
+            });
+            setCliente(retrievedCliente);
+            setPolizzeAuto(retrievedPolizzeAuto);
+            setPolizzePrevidenza(retrievedPolizzePrevidenza);
+            setPolizzeVita(retrievedPolizzeVita);
             
             // FETCH LOCAL SPRING BOOT REST API
             // try {
@@ -53,8 +79,6 @@ const ClienteDetailsPage = () => {
             // catch (error) {
             //     setError("Impossibile caricare i dati.");
             // }
-            setCliente(retrievedCliente);
-            setPolizze(retrievedPolizze);
         })();
     }, []);
 
@@ -71,7 +95,7 @@ const ClienteDetailsPage = () => {
                 <div className={styles.container_left}>
                     <div className={styles.overview_panel}>
                         <img src={Utils.getImageByTipo(cliente.tipo)} alt="img" />
-                        <h1 className={styles.overview_name}> {Utils.getValueByColumn(cliente, Utils.Columns.NOME_RAGSOCIALE)} </h1>
+                        <h1 className={styles.overview_name}> {Utils.getValueByColumn(cliente, Utils.columns.NOME_RAGSOCIALE)} </h1>
                     </div>
                 </div>
 
@@ -79,7 +103,7 @@ const ClienteDetailsPage = () => {
                 <div className={styles.container_right}>
                     <div className={styles.details_panel}>
                         <h4 className={styles.details_panel_heading}> Dettagli </h4>
-                        <ClienteInfo cliente={cliente} />
+                        <ClienteDetailsPageInfo cliente={cliente} />
                     </div>
                 </div>
 
@@ -90,7 +114,9 @@ const ClienteDetailsPage = () => {
             <div className={stylesListPage.container}>
 
                 {/* Bottom */}
-                <PolizzaTable list={polizze} />
+                {polizzeAuto.length > 0 && <ClienteDetailsPageTablePolizzeAuto list={polizzeAuto} />}
+                {polizzePrevidenza.length > 0 && <ClienteDetailsPageTablePolizzePrevidenza list={polizzePrevidenza} />}
+                {polizzePrevidenza.length > 0 && <ClienteDetailsPageTablePolizzeVita list={polizzeVita} />}
 
             </div>
 

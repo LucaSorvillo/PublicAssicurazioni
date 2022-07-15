@@ -8,7 +8,15 @@ import "styles/Navbar/Dropdown.css";
 // Cascading Menu Entries 
 const MenuItems = [
     {
-        title: "TITOLO",
+        title: "Nuovo Cliente",
+        path: "path/to/resource"
+    },
+    {
+        title: "Nuovo Polizza",
+        path: "path/to/resource"
+    },
+    {
+        title: "Nuovo Veicolo",
         path: "path/to/resource"
     },
     // ...
@@ -17,7 +25,8 @@ const MenuItems = [
 
 
 const Dropdown = () => {
-
+    
+    // ???
     const [click, setClick] = useState(false);
 
     const handleClick = () => {
@@ -31,7 +40,7 @@ const Dropdown = () => {
             {MenuItems.map((item, index) => (
                 
                 <li key={index}>
-                    <Link className="dropdown-link" to={item.path} onClick={() => setClick(false)}>
+                    <Link to={item.path} className="dropdown-link" onClick={() => setClick(false)}>
                         {item.title}
                     </Link>
                 </li>

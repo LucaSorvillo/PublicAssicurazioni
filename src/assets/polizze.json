@@ -1,7 +1,5 @@
 [
     
-    
-    
     {
         "id": 1,
         "tipo": "polizza_auto",
@@ -11,7 +9,8 @@
         "premio": 5245.99,
         "scadenza": "23/10/2022",
         
-        "idCliente": 1
+        "idCliente": 1,
+        "idVeicolo": 1
     },
     {
         "id": 11,
@@ -21,6 +20,41 @@
         "compagnia": "Allianz",
         "premio": 6245.99,
         "scadenza": "04/12/2022",
+        
+        "idCliente": 1,
+        "idVeicolo": 2
+    },
+    {
+        "id": 111,
+        "tipo": "polizza_auto",
+        
+        "polizza": "6476578364875",
+        "compagnia": "Allianz",
+        "premio": 6245.99,
+        "scadenza": "04/12/2022",
+        
+        "idCliente": 1,
+        "idVeicolo": 3
+    },
+    {
+        "id": 1111,
+        "tipo": "polizza_vita",
+        
+        "polizza": "3462374243",
+        "compagnia": "Generali",
+        "premio": 34234.99,
+        "scadenza": "09/01/2027",
+        
+        "idCliente": 1
+    },
+    {
+        "id": 11111,
+        "tipo": "polizza_providenza",
+        
+        "polizza": "745647353",
+        "compagnia": "Allianz",
+        "premio": 46394.99,
+        "scadenza": "31/07/2026",
         
         "idCliente": 1
     }
@@ -36,19 +70,32 @@
         
         "polizza": "7537465786364",
         "compagnia": "Sara",
-        "premio": 35765635.99,
+        "premio": 35765.99,
         "scadenza": "15/04/2022",
         
-        "idCliente": 2
+        "idCliente": 2,
+        "idVeicolo": 4
     },
     {
         "id": 22,
         "tipo": "polizza_auto",
         
-        "polizza": "434355334",
+        "polizza": "434355334534",
         "compagnia": "Sara",
         "premio": 4354.99,
         "scadenza": "23/07/2022",
+        
+        "idCliente": 2,
+        "idVeicolo": 5
+    },
+    {
+        "id": 222,
+        "tipo": "polizza_vita",
+        
+        "polizza": "836236474",
+        "compagnia": "Generali",
+        "premio": 35235.99,
+        "scadenza": "11/01/2027",
         
         "idCliente": 2
     }
@@ -67,7 +114,8 @@
         "premio": 3245.99,
         "scadenza": "06/06/2022",
         
-        "idCliente": 3
+        "idCliente": 3,
+        "idVeicolo": 6
     },
     {
         "id": 33,
@@ -75,10 +123,11 @@
         
         "polizza": "4735748365843",
         "compagnia": "Generali",
-        "premio": 324634.99,
+        "premio": 3246.99,
         "scadenza": "31/05/2023",
         
-        "idCliente": 3
+        "idCliente": 3,
+        "idVeicolo": 7
     }
     
     
@@ -92,10 +141,11 @@
                 
         "polizza": "1721872678",
         "compagnia": "Generali",
-        "premio": 53435.99,
+        "premio": 5343.99,
         "scadenza": "22/12/2022",
         
-        "idCliente": 4
+        "idCliente": 4,
+        "idVeicolo": 8
     },
     {
         "id": 44,
@@ -103,10 +153,11 @@
                 
         "polizza": "273648263",
         "compagnia": "Generali",
-        "premio": 425234.99,
+        "premio": 4252.99,
         "scadenza": "20/11/2024",
         
-        "idCliente": 4
+        "idCliente": 4,
+        "idVeicolo": 9
     }
     
     
@@ -123,7 +174,8 @@
         "premio": 4535.99,
         "scadenza": "01/07/2022",
         
-        "idCliente": 5
+        "idCliente": 5,
+        "idVeicolo": 10
     },
     {
         "id": 55,
@@ -131,10 +183,11 @@
         
         "polizza": "5768436543",
         "compagnia": "Allianz",
-        "premio": 34345.99,
+        "premio": 3434.99,
         "scadenza": "09/01/2025",
         
-        "idCliente": 5
+        "idCliente": 5,
+        "idVeicolo": 11
     }
     
     
