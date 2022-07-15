@@ -12,15 +12,8 @@
         "indirizzoResidenza": "Via Cesare, 10",
         
         "tel": "133-333-3333",
-        "email": "giovanni.bianchi@gmail.com",
-        
-        
-        "polizza": "5476578364875",
-        "compagnia": "Allianz",
-        "premio": 5245.99,
-        "scadenza": "23/10/2022"
+        "email": "giovanni.bianchi@gmail.com"
     },
-    
     {
         "id": 2,
         "tipo": "cliente_azienda",
@@ -32,15 +25,8 @@
         
         
         "tel": "244-444-4444",
-        "email": "ingrosso.bibite@gmail.com",
-        
-        
-        "polizza": "7537465786364",
-        "compagnia": "Allianz",
-        "premio": 35765635.99,
-        "scadenza": "15/04/2022"
+        "email": "ingrosso.bibite@gmail.com"
     },
-    
     {
         "id": 3,
         "tipo": "cliente_persona",
@@ -54,15 +40,8 @@
         "indirizzoResidenza": "Via Cesare, 10",
         
         "tel": "333-333-3333",
-        "email": "mario.rossi@gmail.com",
-        
-        
-        "polizza": "3562784657365",
-        "compagnia": "Allianz",
-        "premio": 3245.99,
-        "scadenza": "06/06/2022"
+        "email": "mario.rossi@gmail.com"
     },
-    
     {
         "id": 4,
         "tipo": "cliente_azienda",
@@ -74,15 +53,8 @@
         
         
         "tel": "444-444-4444",
-        "email": "ingrosso.monouso@gmail.com",
-        
-        
-        "polizza": "3567465786364",
-        "compagnia": "Sara",
-        "premio": 53435.99,
-        "scadenza": "22/12/2022"
+        "email": "ingrosso.monouso@gmail.com"
     },
-    
     {
         "id": 5,
         "tipo": "cliente_persona",
@@ -96,13 +68,7 @@
         "indirizzoResidenza": "Via Nanni, 11",
         
         "tel": "533-333-3333",
-        "email": "giovanni.dambi@gmail.com",
-        
-        
-        "polizza": "7543874578364",
-        "compagnia": "Sara",
-        "premio": 4535.99,
-        "scadenza": "01/07/2022"
+        "email": "giovanni.dambi@gmail.com"
     }
     
 ]

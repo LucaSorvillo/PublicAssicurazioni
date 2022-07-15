@@ -3,98 +3,162 @@ import { React, useState } from "react";
 import { Link } from "react-router-dom";
 
 // Components
-import Dropdown from "components/Navbar/Dropdown";
+import DropdownNuovo from "components/Navbar/DropdownNuovo";
 
 // Styles
 import "styles/Navbar/Navbar.css";
 
 const Navbar = () => {
 
-    const [click, setClick] = useState(false);
+    const [clickMobileMenu, setClickMobileMenu] = useState(false); //DISABLE
+    // const [clickMobileMenu, setClickMobileMenu] = useState(true); //ENABLE
     const [dropdown, setDropdown] = useState(false);
 
-    const handleClick = () => {
-        setClick(!click);
-    };
-
-    const closeMobileMenu = () => {
-        setClick(false);
-    };
-
-    const onMouseEnter = () => {
+    
+    // on focus mouse
+    const handleMouseEnter = () => {
         if (window.innerWidth < 960) {
             setDropdown(false);
         } else {
             setDropdown(true);
         }
     };
-
-    const onMouseLeave = () => {
-        if (window.innerWidth < 960) {
-            setDropdown(false);
-        } else {
-            setDropdown(false);
-        }
+    
+    // on leave mouse
+    const handleMouseLeave = () => {
+        setDropdown(false);
     };
 
+    
+    
     return (
 
         <nav className="navbar">
-
-            {/* Logo */}
-            <Link to="/" className="navbar-logo" onClick={closeMobileMenu}>
+        {/* ---------------------------------------------------------------------- */}
+        {/* Navbar */}
+        {/* ---------------------------------------------------------------------- */}
+        
+            
+            {/* ---------------------------------------------------------------------- */}
+            {/* Navbar Logo */}
+            {/* ---------------------------------------------------------------------- */}
+            <Link to="/" className="navbar-logo"
+            // handleClickCloseMobileMenu
+            onClick={() => setClickMobileMenu(false)}>
                 Assicurazioni
             </Link>
-
-            {/* Icona Menu Hamburger */}
-            <div className="menu-icon" onClick={handleClick}>
-                <i className={click ? "fas fa-times" : "fas fa-bars"} />
+            
+            
+            {/* ---------------------------------------------------------------------- */}
+            {/* Navbar Menu Icon */}
+            {/* ---------------------------------------------------------------------- */}
+            <div className="menu-icon"
+            // handleClickToggleMobileMenu
+            onClick={() => setClickMobileMenu(!clickMobileMenu)}>
+                <i className={clickMobileMenu ? "fas fa-times" : "fas fa-bars"} />
             </div>
-
-
-            {/* Menu Hamburger */}
-            <ul className={click ? "nav-menu active" : "nav-menu"}>
-
-                {/* Section */}
+            
+            
+            {/* ---------------------------------------------------------------------- */}
+            {/* Navbar Menu */}
+            {/* ---------------------------------------------------------------------- */}
+            <ul className={clickMobileMenu ? "nav-menu active" : "nav-menu"}>
+                
+                
+                {/* ---------------------------------------------------------------------- */}
+                {/* Navbar Menu Section */}
+                {/* ---------------------------------------------------------------------- */}
                 <li className="nav-item">
-                    {/* <Link to="/clienti" className="nav-links" onClick={closeMobileMenu}> */}
-                    <Link to="/" className="nav-links" onClick={closeMobileMenu}>
+                    <Link to="/clienti" className="nav-links"
+                    // handleClickCloseMobileMenu
+                    onClick={() => setClickMobileMenu(false)}>
                         Clienti
                     </Link>
                 </li>
-
-                {/* Cascade Section  */}
-                {/* <li className="nav-item" onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
-                    <Link to="/elementoPredefinitoSezioneCascata" className="nav-links" onClick={closeMobileMenu}>
-                        Sezione a Cascata <i className="fas fa-caret-down" />
-                    </Link>
-                    {dropdown && <Dropdown />}
-                </li> */}
-
-                {/* Section */}
-                {/* <li className="nav-item">
-                    <Link to="/" className="nav-links" onClick={closeMobileMenu}>
-                        SezioneVuota
-                    </Link>
-                </li> */}
-
-                {/* Last Section (only menu hamburger) */}
-                {/* <li>
-                    <a className="nav-links-mobile" target="_blank" rel="noreferrer" href="blank">
-                        UltimaSezioneMenuHamburger
-                    </a>
-                </li> */}
                 
+                
+                {/* ---------------------------------------------------------------------- */}
+                {/* Navbar Menu Section */}
+                {/* ---------------------------------------------------------------------- */}
+                <li className="nav-item">
+                    <Link to="/polizze" className="nav-links"
+                    // handleClickCloseMobileMenu
+                    onClick={() => setClickMobileMenu(false)}>
+                        Polizze
+                    </Link>
+                </li>
+                
+                
+                {/* ---------------------------------------------------------------------- */}
+                {/* Navbar Menu Section */}
+                {/* ---------------------------------------------------------------------- */}
+                <li className="nav-item">
+                    <Link to="/veicoli" className="nav-links"
+                    // handleClickCloseMobileMenu
+                    onClick={() => setClickMobileMenu(false)}>
+                        Veicoli
+                    </Link>
+                </li>
+                
+                
+                {/* ---------------------------------------------------------------------- */}
+                {/* Navbar Menu Section Cascade (DROPDOWN) */}
+                {/* ---------------------------------------------------------------------- */}
+                <li className="nav-item"
+                // handleMouseEnter (FOR DESKTOP)
+                onMouseEnter={handleMouseEnter}
+                // handleMouseLeave (FOR DESKTOP)
+                onMouseLeave={handleMouseLeave}>
+                    <Link to="/nuovo" className="nav-links"
+                    // handleClickCloseMobileMenu
+                    onClick={() => setClickMobileMenu(false)}>
+                        Nuovo ▼
+                        {/* ??? */} <i className="fas fa-caret-down" />
+                    </Link>
+                    {dropdown && <DropdownNuovo />}
+                </li>
+                
+                {/* ---------------------------------------------------------------------- */}
+                {/* Navbar Menu Section */}
+                {/* ---------------------------------------------------------------------- */}
+                <li className="nav-item">
+                    <Link to="/ricerca" className="nav-links"
+                    // handleClickCloseMobileMenu
+                    onClick={() => setClickMobileMenu(false)}>
+                        Ricerca 🔍
+                    </Link>
+                </li>
+                
+                
+                
+                
+                
+                {/* ---------------------------------------------------------------------- */}
+                {/* Navbar Menu Section Violet (discord - ONLY MOBILE) */}
+                {/* ---------------------------------------------------------------------- */}
+                <li>
+                    <a className="nav-links-mobile" target="_blank" rel="noreferrer" href="blank">
+                        Violet Button MOBILE
+                    </a>
+                </li>
+                
+                
+                
+            {/* --------------------- END Navbar Menu --------------------- */}
             </ul>
 
-            {/* Last Section */}
-            <a target="_blank" rel="noreferrer" href="https://sorvassicurazioni.wixsite.com/website">
+
+            {/* ---------------------------------------------------------------------- */}
+            {/* Navbar Menu Section Violet (discord - ONLY DESKTOP) */}
+            {/* ---------------------------------------------------------------------- */}
+            {/* <a target="_blank" rel="noreferrer" href="blank">
                 <button className="btn">
-                    Contatti
+                    Violet Button DESKTOP
                 </button>
-            </a>
+            </a> */}
             
 
+        {/* --------------------- END Navbar --------------------- */}
         </nav>
 
     );

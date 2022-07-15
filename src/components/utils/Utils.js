@@ -1,22 +1,36 @@
 // Images
-import imgPersonaSmall from "assets/1.persona_small.jpg";
-import imgAziendaSmall from "assets/2.azienda_small.jpg";
-import imgAutovetturaSmall from "assets/3.autovettura_small.jpg";
-import imgCiclomotoreSmall from "assets/4.ciclomotore_small.jpg";
+import imgPersonaSmall from "assets/cliente_persona_small.jpg";
+import imgPersonaBig from "assets/cliente_persona_big.jpg";
 
-import imgPersonaBig from "assets/1.persona_big.jpg";
-import imgAziendaBig from "assets/2.azienda_big.jpg";
-import imgAutovetturaBig from "assets/3.autovettura_big.jpg";
-import imgCiclomotoreBig from "assets/4.ciclomotore_big.jpg";
+import imgAziendaSmall from "assets/cliente_azienda_small.jpg";
+import imgAziendaBig from "assets/cliente_azienda_big.jpg";
+
+import imgAutovetturaSmall from "assets/veicolo_autovettura_small.jpg";
+import imgAutovetturaBig from "assets/veicolo_autovettura_big.jpg";
+
+import imgAutocarroSmall from "assets/veicolo_autocarro_small.jpg";
+import imgAutocarroBig from "assets/veicolo_autocarro_big.jpg";
+
+import imgCiclomotoreSmall from "assets/veicolo_ciclomotore_small.jpg";
+import imgCiclomotoreBig from "assets/veicolo_ciclomotore_big.jpg";
+
+// img autocarro
+
 
 // Libraries
 import moment from "moment";
+
 
 const Utils = {};
 
 // ----------------------------------------------------------------------------------------------------
 // Data
 // ----------------------------------------------------------------------------------------------------
+
+Utils.size = {
+    SMALL: 0,
+    BIG: 1
+}
 
 Utils.giorniDiAvviso = 30;
 
@@ -25,20 +39,21 @@ Utils.direction = {
     DECR: "decr"
 };
 
-
-
 Utils.tipo = {
+    
     CLIENTE_PERSONA: "cliente_persona",
     CLIENTE_AZIENDA: "cliente_azienda",
+    
     VEICOLO_AUTOVETTURA: "veicolo_autovettura",
     VEICOLO_CICLOMOTORE: "veicolo_ciclomotore",
-    VEICOLO_AUTOCARRO: "veicolo_ciclomotore",
+    VEICOLO_AUTOCARRO: "veicolo_autocarro",
+    
     POLIZZA_AUTO: "polizza_auto",
     POLIZZA_VITA: "polizza_vita",
     POLIZZA_PREVIDENZA: "polizza_previdenza"
 };
 
-Utils.Columns = {
+Utils.columns = {
     TIPO: "Tipo",
     NOME_RAGSOCIALE: "Nome/Ragione Sociale",
 
@@ -68,66 +83,65 @@ Utils.Columns = {
 // Functions
 // ----------------------------------------------------------------------------------------------------
 
-// used in getValueByColumn to get field/multiple fields
+// Used to get json field/fields from selected column table
 Utils.getJsonFieldByColumn = function (column) {
     switch (column) {
         
-        case Utils.Columns.TIPO:
+        case Utils.columns.TIPO:
             return "tipo";
-        case Utils.Columns.NOME_RAGSOCIALE:
+        case Utils.columns.NOME_RAGSOCIALE:
             return ["nome", "cognome", "ragioneSociale"];
             
-        case Utils.Columns.CF:
+        case Utils.columns.CF:
             return "cf";
-        case Utils.Columns.NOME:
+        case Utils.columns.NOME:
             return "nome";
-        case Utils.Columns.COGNOME:
+        case Utils.columns.COGNOME:
             return "cognome";
-        case Utils.Columns.DATA_NASCITA:
+        case Utils.columns.DATA_NASCITA:
             return "dataNascita";
-        case Utils.Columns.LUOGO_NASCITA:
+        case Utils.columns.LUOGO_NASCITA:
             return "luogoNascita";
-        case Utils.Columns.COMUNE_RESIDENZA:
+        case Utils.columns.COMUNE_RESIDENZA:
             return "comuneResidenza";
-        case Utils.Columns.INDIRIZZO_RESIDENZA:
+        case Utils.columns.INDIRIZZO_RESIDENZA:
             return "indirizzoResidenza";
             
-        case Utils.Columns.PIVA:
+        case Utils.columns.PIVA:
             return "pIVA";
-        case Utils.Columns.RAGIONE_SOCIALE:
+        case Utils.columns.RAGIONE_SOCIALE:
             return "ragioneSociale";
-        case Utils.Columns.COMUNE_SEDE:
+        case Utils.columns.COMUNE_SEDE:
             return "comuneSede";
-        case Utils.Columns.INDIRIZZO_SEDE:
+        case Utils.columns.INDIRIZZO_SEDE:
             return "indirizzoSede";
             
-        case Utils.Columns.TEL:
+        case Utils.columns.TEL:
             return "tel";
-        case Utils.Columns.EMAIL:
+        case Utils.columns.EMAIL:
             return "email";
             
-        case Utils.Columns.POLIZZA:
+        case Utils.columns.POLIZZA:
             return "polizza";
-        case Utils.Columns.COMPAGNIA:
+        case Utils.columns.COMPAGNIA:
             return "compagnia";
-        case Utils.Columns.PREMIO:
+        case Utils.columns.PREMIO:
             return "premio";
-        case Utils.Columns.SCADENZA:
+        case Utils.columns.SCADENZA:
             return "scadenza";
+            
         default:
             return null;
     }
 };
 
-
-
-// used for multifields, dates, etc
+// Used to get unified value from json fields to allow data comparison
 Utils.getValueByColumn = function (record, column) {
     
-    // get field
+    // get field/fields
     const field = Utils.getJsonFieldByColumn(column);
     
-    // multiple fields
+    // multiple fields: get unified value summing fields
     if (Array.isArray(field)) {
         let value = "";
         field.map((singleField) => 
@@ -136,21 +150,30 @@ Utils.getValueByColumn = function (record, column) {
         return value;
     }
     
-    // date
+    // date: get JS date object formatted to allow comparison
     if (moment(record[field], "DD/MM/YYYY").isValid()) {
         return new Date(moment(record[field], "DD/MM/YYYY").format("YYYY-MM-DD"));
     }
     
-    // normal
-    return record[field];
-    
+    // generic value
+    return record[field];  
 };
 
-// used in tables for sorting
+// Used in tables for searching by keyword on specified column
+Utils.getFilteredList = function (list, keyword, column) {
+    if (!list || list.length === 0 || !keyword || !column) {
+        return list;
+    }
+    return [...list].filter((record) => {
+        const value = Utils.getValueByColumn(record, column)
+        return value.toLowerCase().includes(keyword.toLowerCase());
+    });
+};
+
+// Used in tables for sorting by selected column and direction
 Utils.getSortedList = function (list, column, direction) {
 
-    // if no direction or list empty
-    if (!direction || !list || list.length === 0) {
+    if (!list || list.length === 0 || !column || !direction) {
         return list;
     }
     
@@ -162,7 +185,7 @@ Utils.getSortedList = function (list, column, direction) {
     });
     
     // if tipo reverse
-    if (column === Utils.Columns.TIPO) {
+    if (column === Utils.columns.TIPO) {
         list = [...list].reverse();
     }
 
@@ -170,54 +193,79 @@ Utils.getSortedList = function (list, column, direction) {
     if (direction === Utils.direction.DECR) {
         list = [...list].reverse();
     }
-    
     return list;
-
 };
 
-// used in tables for filtering
-Utils.getFilteredList = function (list, column, keyword) {
-    return [...list].filter((record) => {
-        const value = Utils.getValueByColumn(record, column)
-        return value.toLowerCase().includes(keyword.toLowerCase());
-    });
-};
-
-// used in tables and detailsPage
-Utils.getImageByTipo = function (tipo, size) {
-    if (size === undefined) {
-        size = 1;
-    }
+// Used to get correct image by tipo and size (default size: big)
+Utils.getImageByTipo = function (tipo, size=Utils.size.BIG) {
+    
     switch (tipo) {
+        
         case Utils.tipo.CLIENTE_PERSONA:
             return size ? imgPersonaBig : imgPersonaSmall;
         case Utils.tipo.CLIENTE_AZIENDA:
             return size ? imgAziendaBig : imgAziendaSmall;
             
-            case Utils.tipo.POLIZZA_AUTO:
-                return size ? imgCiclomotoreBig : imgCiclomotoreSmall;
-            case Utils.tipo.POLIZZA_VITA:
-                return size ? imgCiclomotoreBig : imgCiclomotoreSmall;
-            case Utils.tipo.POLIZZA_PREVIDENZA:
-                return size ? imgCiclomotoreBig : imgCiclomotoreSmall;
-                
+        case Utils.tipo.POLIZZA_VITA:
+            return size ? imgCiclomotoreBig : imgCiclomotoreSmall;
+        case Utils.tipo.POLIZZA_PREVIDENZA:
+            return size ? imgCiclomotoreBig : imgCiclomotoreSmall;
+        
         case Utils.tipo.VEICOLO_AUTOVETTURA:
             return size ? imgAutovetturaBig : imgAutovetturaSmall;
+        case Utils.tipo.VEICOLO_AUTOCARRO:
+            return size ? imgAutocarroBig : imgAutocarroSmall;
         case Utils.tipo.VEICOLO_CICLOMOTORE:
             return size ? imgCiclomotoreBig : imgCiclomotoreSmall;
+            
         default:
             return null;
     }
 };
 
-// used in tables for validation
-Utils.isInScadenza = function (stringaDataScadenza) {
+// Used for Polizze Scadenza
+Utils.isInScadenza = function (stringDataScadenza) {
     const giorniDiAvviso = Utils.giorniDiAvviso;
-    const dataScadenza = new Date(moment(stringaDataScadenza, "DD/MM/YYYY").format("YYYY-MM-DD"));
+    const dataScadenza = new Date(moment(stringDataScadenza, "DD/MM/YYYY").format("YYYY-MM-DD"));
     const oggi = new Date();
-    const dataCheck = new Date(moment(oggi).add(giorniDiAvviso, "days"));
-    return dataCheck >= dataScadenza;
+    const oggiPiuGiorniDiAvviso = new Date(moment(oggi).add(giorniDiAvviso, "days"));
+    // nota: oggi > dataScadenza allora scaduta
+    return oggiPiuGiorniDiAvviso >= dataScadenza;
 };
+
+// Used only for Tables to handle behaviour of selecting Columns or Direction
+// previous function name: setColumnAndDirection
+Utils.getChangedColumnAndDirection = function (newColumn, prevColumn, prevDirection) {
+    
+    // different column: change column and reset direction
+    if (newColumn !== prevColumn) {
+        return {
+            column: newColumn,
+            direction: Utils.direction.INCR
+        };
+    }
+    
+    // same column: change direction
+    let newDirection;
+    switch (prevDirection) {
+        case undefined:
+            newDirection = Utils.direction.INCR;
+            break;
+        case Utils.direction.INCR:
+            newDirection = Utils.direction.DECR;
+            break;
+        case Utils.direction.DECR:
+            newDirection = undefined;
+            break;
+        default:
+            break;
+    }
+
+    return {
+        column: prevColumn,
+        direction: newDirection
+    };
+}
 
 
 

@@ -5,21 +5,89 @@
         
         "targa": "AA-AA-AA",
         "marca": "Fiat",
-        "modello": "Punto",
-        
-        "idPolizza": 1
-    },
-    
+        "modello": "Punto"
+    }, 
     {
-        "id": 11,
+        "id": 2,
         "tipo": "veicolo_ciclomotore",
         
-        "targa": "BA-AA-AA",
+        "targa": "BB-AA-AA",
         "marca": "Yamaha",
-        "modello": "YZF-R6",
+        "modello": "YZF-R6"
+    },
+    {
+        "id": 3,
+        "tipo": "veicolo_autocarro",
         
-        "idPolizza": 1
+        "targa": "BB-AA-AA",
+        "marca": "Iveco",
+        "modello": "Eurocargo"
+    },
+    {
+        "id": 4,
+        "tipo": "veicolo_autovettura",
+        
+        "targa": "DD-AA-AA",
+        "marca": "Mercedes",
+        "modello": "ClasseA"
+    }, 
+    {
+        "id": 5,
+        "tipo": "veicolo_ciclomotore",
+        
+        "targa": "EE-AA-AA",
+        "marca": "Suzuki",
+        "modello": "GSX-R1000"
+    }, 
+    {
+        "id": 6,
+        "tipo": "veicolo_autovettura",
+        
+        "targa": "FF-AA-AA",
+        "marca": "Lancia",
+        "modello": "Y"
+    }, 
+    {
+        "id": 7,
+        "tipo": "veicolo_autovettura",
+        
+        "targa": "GG-AA-AA",
+        "marca": "Alfa Romeo",
+        "modello": "Giulietta"
+    }, 
+    {
+        "id": 8,
+        "tipo": "veicolo_autovettura",
+        
+        "targa": "HH-AA-AA",
+        "marca": "Jeep",
+        "modello": "Renegade"
+    }, 
+    {
+        "id": 9,
+        "tipo": "veicolo_autovettura",
+        
+        "targa": "II-AA-AA",
+        "marca": "Citroen",
+        "modello": "C3"
+    },
+    {
+        "id": 10,
+        "tipo": "veicolo_autovettura",
+        
+        "targa": "CC-AA-AA",
+        "marca": "Dacia",
+        "modello": "Sandero"
+    },
+    {
+        "id": 11,
+        "tipo": "veicolo_autovettura",
+        
+        "targa": "CC-AA-AA",
+        "marca": "Toyota",
+        "modello": "Yaris"
     }
+    
     
     
     
