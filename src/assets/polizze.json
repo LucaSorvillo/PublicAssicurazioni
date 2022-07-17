@@ -16,7 +16,7 @@
         "id": 11,
         "tipo": "polizza_auto",
         
-        "polizza": "6476578364875",
+        "polizza": "6476485487538",
         "compagnia": "Allianz",
         "premio": 6245.99,
         "scadenza": "04/12/2022",
@@ -28,10 +28,10 @@
         "id": 111,
         "tipo": "polizza_auto",
         
-        "polizza": "6476578364875",
+        "polizza": "9325733437885",
         "compagnia": "Allianz",
-        "premio": 6245.99,
-        "scadenza": "04/12/2022",
+        "premio": 1271.99,
+        "scadenza": "27/07/2022",
         
         "idCliente": 1,
         "idVeicolo": 3

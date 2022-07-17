@@ -10,7 +10,7 @@ import MainPage from "components/MainPage/MainPage";
 import ClientiPage from "components/ClientiPage/ClientiPage";
 import PolizzePage from "components/PolizzePage/PolizzePage";
 import VeicoliPage from "components/VeicoliPage/VeicoliPage";
-// import NuovoPage from "components/NuovoPage/NuovoPage";
+import NuovoClientePage from "components/NuovoClientePage/NuovoClientePage";
 import RicercaPage from "components/RicercaPage/RicercaPage";
 import ClienteDetailsPage from "components/ClienteDetailsPage/ClienteDetailsPage";
 import WrongPage from "components/WrongPage";
@@ -27,18 +27,16 @@ function App() {
 				<Routes>
 					
 					<Route path="/" element={<MainPage />} />
-					{/* <Route path="/nuovo" element={<NuovoPage />} /> */}
 					<Route path="/clienti" element={<ClientiPage />} />
-					{/* ----------------- polizze collegato a main ma non deve essere cosi ---------------------------- */}
-					{/* <Route path="/polizze" element={<PolizzePage />} /> */}
-					<Route path="/polizze" element={<MainPage />} /> 
-					{/* ----------------------------------------------- */}
+					<Route path="/polizze" element={<PolizzePage />} />
 					<Route path="/veicoli" element={<VeicoliPage />} />
+					<Route path="/nuovo-cliente" element={<NuovoClientePage />} />
 					<Route path="/ricerca" element={<RicercaPage />} />
 					
 					<Route path="/clienti/:idCliente" element={<ClienteDetailsPage />} />
 					
 					<Route path="*" element={<WrongPage />} />
+					
 				</Routes>
 			</Router>
 		</div>

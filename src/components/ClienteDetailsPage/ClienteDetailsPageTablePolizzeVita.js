@@ -70,16 +70,13 @@ const ClienteDetailsPageTablePolizzeVita = ({ list }) => {
 
 
 			{polizzeVita.map((polizza) => (
-				<Link to={`/clienti/${polizza.id}`} key={polizza.id}>
+				<Link to={`/polizze/${polizza.id}`} key={polizza.id}>
 					<div className={`${styles.row}  ${Utils.isInScadenza(polizza.scadenza) ? styles.row_red : styles.row_green}`}>
-						
 						<div className={styles.thumbnail}> <img src={Utils.getImageByTipo(polizza.tipo, Utils.size.SMALL)} alt="img" /> </div>
 						<div className={styles.first}> {polizza.polizza} </div>
 						<div className={styles.medium}> {polizza.compagnia} </div>
 						<div className={styles.medium}> € {polizza.premio} </div>
-						<div className={styles.last}> <p className={Utils.isInScadenza(polizza.scadenza) ? styles.red : styles.green}> {polizza.scadenza} </p>
-						</div>
-
+						<div className={styles.last}> <p className={Utils.isInScadenza(polizza.scadenza) ? styles.red : styles.green}> {polizza.scadenza} </p> </div>
 					</div>
 				</Link>
 			))}

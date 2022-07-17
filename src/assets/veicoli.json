@@ -5,7 +5,9 @@
         
         "targa": "AA-AA-AA",
         "marca": "Fiat",
-        "modello": "Punto"
+        "modello": "Punto",
+        
+        "idCliente": 1
     }, 
     {
         "id": 2,
@@ -13,7 +15,9 @@
         
         "targa": "BB-AA-AA",
         "marca": "Yamaha",
-        "modello": "YZF-R6"
+        "modello": "YZF-R6",
+        
+        "idCliente": 1
     },
     {
         "id": 3,
@@ -21,7 +25,9 @@
         
         "targa": "BB-AA-AA",
         "marca": "Iveco",
-        "modello": "Eurocargo"
+        "modello": "Eurocargo",
+        
+        "idCliente": 1
     },
     {
         "id": 4,
@@ -29,7 +35,9 @@
         
         "targa": "DD-AA-AA",
         "marca": "Mercedes",
-        "modello": "ClasseA"
+        "modello": "ClasseA",
+        
+        "idCliente": 2
     }, 
     {
         "id": 5,
@@ -37,7 +45,9 @@
         
         "targa": "EE-AA-AA",
         "marca": "Suzuki",
-        "modello": "GSX-R1000"
+        "modello": "GSX-R1000",
+        
+        "idCliente": 2
     }, 
     {
         "id": 6,
@@ -45,7 +55,9 @@
         
         "targa": "FF-AA-AA",
         "marca": "Lancia",
-        "modello": "Y"
+        "modello": "Y",
+        
+        "idCliente": 3
     }, 
     {
         "id": 7,
@@ -53,7 +65,9 @@
         
         "targa": "GG-AA-AA",
         "marca": "Alfa Romeo",
-        "modello": "Giulietta"
+        "modello": "Giulietta",
+        
+        "idCliente": 3
     }, 
     {
         "id": 8,
@@ -61,7 +75,9 @@
         
         "targa": "HH-AA-AA",
         "marca": "Jeep",
-        "modello": "Renegade"
+        "modello": "Renegade",
+        
+        "idCliente": 4
     }, 
     {
         "id": 9,
@@ -69,7 +85,9 @@
         
         "targa": "II-AA-AA",
         "marca": "Citroen",
-        "modello": "C3"
+        "modello": "C3",
+        
+        "idCliente": 4
     },
     {
         "id": 10,
@@ -77,7 +95,9 @@
         
         "targa": "CC-AA-AA",
         "marca": "Dacia",
-        "modello": "Sandero"
+        "modello": "Sandero",
+        
+        "idCliente": 5
     },
     {
         "id": 11,
@@ -85,7 +105,9 @@
         
         "targa": "CC-AA-AA",
         "marca": "Toyota",
-        "modello": "Yaris"
+        "modello": "Yaris",
+        
+        "idCliente": 5
     }
     
     
