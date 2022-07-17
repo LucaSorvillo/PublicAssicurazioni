@@ -25,11 +25,11 @@ const ClienteDetailsPage = () => {
 
     const { idCliente } = useParams();
     const [cliente, setCliente] = useState(null);
-    const [polizzeAuto, setPolizzeAuto] = useState([]);
+    const [veicoliConPolizze, setVeicoliConPolizze] = useState([]); // Polizze Auto RCA
     const [polizzePrevidenza, setPolizzePrevidenza] = useState([]);
     const [polizzeVita, setPolizzeVita] = useState([]);
-    const [veicoli, setVeicoli] = useState([]);
-
+    
+    // Mock
     useEffect(() => {
         (async () => {
             
@@ -37,50 +37,76 @@ const ClienteDetailsPage = () => {
                 return;
             }
             
-            // MOCK
             // retrieve cliente
             const retrievedCliente = await clientiJSON.find((cliente) => {
-                return (cliente.id + "") === idCliente;
+                return (idCliente + "") === (cliente.id + "");
             });
-            // retrieve all polizze of cliente
-            const retrievedPolizze = await polizzeJSON.filter((polizza) => {
-                return polizza.idCliente === retrievedCliente.id;
+            
+            // retrieve polizze of cliente
+            const retrievedPolizze = await polizzeJSON.filter(polizza => polizza.idCliente === retrievedCliente.id);
+            
+            // retrieve veicoli + add polizze auto
+            const retrievedVeicoliConPolizze = await veicoliJSON
+            .filter(veicolo => retrievedCliente.id === veicolo.idCliente)
+            .map((veicolo) => {
+                const polizze = retrievedPolizze
+                    .filter(polizza => polizza.tipo === "polizza_auto" && veicolo.id === polizza.idVeicolo)
+                    .sort((a, b) => a.scadenza > b.scadenza ? -1 : 1); // DECR
+                return { ...veicolo, polizze };
             });
-            // retrieve polizze auto
-            const retrievedPolizzeAuto = await retrievedPolizze.filter((polizza) => {
-                return polizza.tipo === "polizza_auto";
-            });
-            // retrieve polizze previdenza
+            
+            // filter polizze previdenza
             const retrievedPolizzePrevidenza = await retrievedPolizze.filter((polizza) => {
                 return polizza.tipo === "polizza_previdenza";
             });
-            // retrieve polizze vita
+            // filter polizze vita
             const retrievedPolizzeVita = await retrievedPolizze.filter((polizza) => {
                 return polizza.tipo === "polizza_vita";
             });
+            
             setCliente(retrievedCliente);
-            setPolizzeAuto(retrievedPolizzeAuto);
+            setVeicoliConPolizze(retrievedVeicoliConPolizze);
             setPolizzePrevidenza(retrievedPolizzePrevidenza);
             setPolizzeVita(retrievedPolizzeVita);
             
-            // FETCH LOCAL SPRING BOOT REST API
-            // try {
-            //     // fetch data
-            //     const response = await fetch(`http://localhost:8080/api/v1/spring-project/heets/findAll`);
-            //     // 404 means empty list
-            //     if (response.status === 404) {
-            //         setHeetsList([]);
-            //         return;
-            //     }
-            //     const data = await response.json();
-            //     setHeetsList(data);
-            // }
-            // // error: server api offline (net::ERR_CONNECTION_REFUSED)
-            // catch (error) {
-            //     setError("Impossibile caricare i dati.");
-            // }
+            
+            
+            // // filter polizze auto + add veicolo
+            // const retrievedPolizzeAuto = await retrievedPolizzeOfCliente
+            // .filter((polizza) => {
+            //     return polizza.tipo === "polizza_auto";
+            // })
+            // .map((polizza) => {
+            //     const veicolo = veicoliJSON.find((veicolo) => {
+            //         return veicolo.id === polizza.idVeicolo;
+            //     });
+            //     return { ...polizza, veicolo };
+            // });
+            
+            
+            
+            
         })();
     }, []);
+    
+    
+    // Local Spring Boot Fetch
+    // try {
+    //     // fetch data
+    //     const response = await fetch(`http://localhost:8080/api/v1/spring-project/heets/findAll`);
+    //     // 404 means empty list
+    //     if (response.status === 404) {
+    //         setHeetsList([]);
+    //         return;
+    //     }
+    //     const data = await response.json();
+    //     setHeetsList(data);
+    // }
+    // // error: server api offline (net::ERR_CONNECTION_REFUSED)
+    // catch (error) {
+    //     setError("Impossibile caricare i dati.");
+    // }
+    
 
     if (!cliente) {
         return null;
@@ -114,7 +140,7 @@ const ClienteDetailsPage = () => {
             <div className={stylesListPage.container}>
 
                 {/* Bottom */}
-                {polizzeAuto.length > 0 && <ClienteDetailsPageTablePolizzeAuto list={polizzeAuto} />}
+                {veicoliConPolizze.length > 0 && <ClienteDetailsPageTablePolizzeAuto list={veicoliConPolizze} />}
                 {polizzePrevidenza.length > 0 && <ClienteDetailsPageTablePolizzePrevidenza list={polizzePrevidenza} />}
                 {polizzePrevidenza.length > 0 && <ClienteDetailsPageTablePolizzeVita list={polizzeVita} />}
 

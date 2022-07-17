@@ -11,7 +11,7 @@ import Utils from "components/utils/Utils";
 // Styles
 import styles from "styles/Table.module.css";
 
-// MAIN PAGE: PER OGNI CLIENTE -> POLIZZE
+// MainPageTable: Tabella per Elenco clienti con polizza più vicina alla scadenza
 const MainPageTable = ({ list }) => {
 
 	const [sortOrder, setSortOrder] = useState({column: undefined, direction: undefined});
@@ -69,20 +69,19 @@ const MainPageTable = ({ list }) => {
 
 			{/* Rows */}
 			{result.map((cliente) => (
-				
-				cliente.polizze.map((polizza) => (
 					
-					<Link to={`/clienti/${cliente.id}`} key={cliente.id}>
-						<div className={`${styles.row}  ${Utils.isInScadenza(polizza.scadenza) ? styles.row_red : styles.row_green}`}>
-							<div className={styles.thumbnail}> <img src={Utils.getImageByTipo(cliente.tipo, Utils.size.SMALL)} alt="img" /> </div>
-							<div className={styles.first}> {Utils.getValueByColumn(cliente, Utils.columns.NOME_RAGSOCIALE)} </div>
-							<div className={styles.medium}> {polizza.polizza} </div>
-							<div className={styles.medium}> {polizza.compagnia} </div>
-							<div className={styles.medium}> € {polizza.premio} </div>
-							<div className={styles.last}> <p className={Utils.isInScadenza(cliente.scadenza) ? styles.red : styles.green}> {polizza.scadenza} </p> </div>
-						</div>
-					</Link>
-				))
+				<Link to={`/clienti/${cliente.id}`} key={cliente.id}>
+					<div className={`${styles.row}  ${Utils.isInScadenza(cliente.polizza.scadenza) ? styles.row_red : styles.row_green}`}>
+						{/* QUESTION: da aggiungere cliente.polizza.tipo per img? */}
+						<div className={styles.thumbnail}> <img src={Utils.getImageByTipo(cliente.tipo, Utils.size.SMALL)} alt="img" /> </div>
+						<div className={styles.first}> {Utils.getValueByColumn(cliente, Utils.columns.NOME_RAGSOCIALE)} </div>
+						<div className={styles.medium}> {cliente.polizza.polizza} </div>
+						<div className={styles.medium}> {cliente.polizza.compagnia} </div>
+						<div className={styles.medium}> € {cliente.polizza.premio} </div>
+						<div className={styles.last}> <p className={Utils.isInScadenza(cliente.polizza.scadenza) ? styles.red : styles.green}> {cliente.polizza.scadenza} </p> </div>
+					</div>
+				</Link>
+				
 			))}
 
 		</div>

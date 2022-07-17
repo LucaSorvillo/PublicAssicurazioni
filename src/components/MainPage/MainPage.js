@@ -16,7 +16,7 @@ import clientiJSON from "assets/clienti.json";
 import polizzeJSON from "assets/polizze.json";
 
 // Route: /
-// MAIN PAGE: PER OGNI CLIENTE -> POLIZZE
+// MainPage: Elenco clienti con polizza più vicina alla scadenza
 const MainPage = () => {
 
     const [keyword, setKeyword] = useState("");
@@ -27,33 +27,42 @@ const MainPage = () => {
         event.preventDefault();
         setKeyword(event.target.value.toLowerCase());
     };
-    
+
     // get filtered list
     const resultFiltered = Utils.getFilteredList(result, keyword, Utils.columns.NOME_RAGSOCIALE);
 
-    // Mock Fetch (CLIENTI + POLIZZE)
+    // Mock
     useEffect(() => {
         (async () => {
             if (!clientiJSON || !polizzeJSON) {
                 return;
             }
-            // MOCK
-            // retrieve result (foreach cliente add polizze)
-            const clientiPiuPolizze = await clientiJSON.map((cliente) => {
-                const polizze = polizzeJSON.filter((polizza) => polizza.idCliente === cliente.id);
-                return { ...cliente, polizze };
+            // retrieve result (foreach cliente add polizza più scadente)
+            const clientiConPolizzaPiuScadente = await clientiJSON.map(cliente => {
+                const polizza = polizzeJSON
+                    .filter(polizza => cliente.id === polizza.idCliente)
+                    // TODO: DA RIVEDEREEE NON PUOI ORDINARE IN MODO INCR SE CI SONO POLIZZE VECCHIE, L'OBIETTIVO é VEDERE QUALE PIU SCADENTE TRA: 
+                    // ULTIMA POLIZZA AUTO, ULTIMA POLIZZA PREVIDENZA, ULTIMA POLIZZA VITA
+                    .sort((a, b) => a.scadenza < b.scadenza ? -1 : 1)[0];
+                return { ...cliente, polizza };
             });
-            setResult(clientiPiuPolizze);
+            setResult(clientiConPolizzaPiuScadente);
+
         })();
     }, []);
 
+    // Real Fetch
+    // useEffect(() => {
+    //     (async () => {
+    //     })();
+    // }, []);
 
     return (
 
         <div className={styles.container}>
 
             <div className={styles.inputContainer}>
-                <div className={styles.counts}> Polizze </div>
+                <div className={styles.counts}> Home </div>
                 <div className={styles.input}>
                     <SearchInput placeholder={`Cerca per ${Utils.columns.NOME_RAGSOCIALE}`} onChange={handleChange} />
                 </div>
@@ -64,7 +73,7 @@ const MainPage = () => {
         </div>
 
     );
-    
+
 };
 
 export default MainPage;

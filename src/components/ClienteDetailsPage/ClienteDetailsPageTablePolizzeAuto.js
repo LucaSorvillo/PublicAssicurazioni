@@ -13,7 +13,7 @@ import styles from "styles/Table.module.css";
 
 
 
-
+// Table for ClienteDetailsPage-PolizzeAuto contains data: VeicoliConPolizze
 const ClienteDetailsPageTablePolizzeAuto = ({ list }) => {
 
 	const [sortOrder, setSortOrder] = useState({column: undefined, direction: undefined});
@@ -24,7 +24,7 @@ const ClienteDetailsPageTablePolizzeAuto = ({ list }) => {
 		setSortOrder(updatedSordOrder);
 	}
 
-	const polizzeAuto = Utils.getSortedList(list, sortOrder.column, sortOrder.direction);
+	const veicoliConPolizze = Utils.getSortedList(list, sortOrder.column, sortOrder.direction);	
 	
 	if (!list) {
 		return null;
@@ -46,11 +46,21 @@ const ClienteDetailsPageTablePolizzeAuto = ({ list }) => {
 					{sortOrder.column === Utils.columns.TIPO && <SortArrow direction={sortOrder.direction} />}
 				</button>
 				
-				<button className={styles.heading_first} onClick={() => changeSortOrder(Utils.columns.POLIZZA)}>
+				<button className={styles.heading_first} onClick={() => changeSortOrder(Utils.columns.TARGA)}>
+					<div> {Utils.columns.TARGA} </div>
+					{sortOrder.column === Utils.columns.TARGA && <SortArrow direction={sortOrder.direction} />}
+				</button>
+				
+				<button className={styles.heading_medium} onClick={() => changeSortOrder(Utils.columns.MARCA_MODELLO)}>
+					<div> {Utils.columns.MARCA_MODELLO} </div>
+					{sortOrder.column === Utils.columns.MARCA_MODELLO && <SortArrow direction={sortOrder.direction} />}
+				</button>
+				
+				<button className={styles.heading_medium} onClick={() => changeSortOrder(Utils.columns.POLIZZA)}>
 					<div> {Utils.columns.POLIZZA} </div>
 					{sortOrder.column === Utils.columns.POLIZZA && <SortArrow direction={sortOrder.direction} />}
 				</button>
-
+				
 				<button className={styles.heading_medium} onClick={() => changeSortOrder(Utils.columns.COMPAGNIA)}>
 					<div> {Utils.columns.COMPAGNIA} </div>
 					{sortOrder.column === Utils.columns.COMPAGNIA && <SortArrow direction={sortOrder.direction} />}
@@ -69,17 +79,16 @@ const ClienteDetailsPageTablePolizzeAuto = ({ list }) => {
 			</div>
 
 
-			{polizzeAuto.map((polizza) => (
-				<Link to={`/clienti/${polizza.id}`} key={polizza.id}>
-					<div className={`${styles.row}  ${Utils.isInScadenza(polizza.scadenza) ? styles.row_red : styles.row_green}`}>
-						
-						<div className={styles.thumbnail}> <img src={Utils.getImageByTipo(polizza.tipo, Utils.size.SMALL)} alt="img" /> </div>
-						<div className={styles.first}> {polizza.polizza} </div>
-						<div className={styles.medium}> {polizza.compagnia} </div>
-						<div className={styles.medium}> € {polizza.premio} </div>
-						<div className={styles.last}> <p className={Utils.isInScadenza(polizza.scadenza) ? styles.red : styles.green}> {polizza.scadenza} </p>
-						</div>
-
+			{veicoliConPolizze.map((veicolo) => (
+				<Link to={`/veicoli/${veicolo.id}`} key={veicolo.id}>
+					<div className={`${styles.row}  ${Utils.isInScadenza(veicolo.polizze[0].scadenza) ? styles.row_red : styles.row_green}`}>
+						<div className={styles.thumbnail}> <img src={Utils.getImageByTipo(veicolo.tipo, Utils.size.SMALL)} alt="img" /> </div>
+						<div className={styles.first}> {veicolo.targa} </div>
+						<div className={styles.medium}> {Utils.getValueByColumn(veicolo, Utils.columns.MARCA_MODELLO)} </div>
+						<div className={styles.medium}> {veicolo.polizze[0].polizza} </div>
+						<div className={styles.medium}> {veicolo.polizze[0].compagnia} </div>
+						<div className={styles.medium}> € {veicolo.polizze[0].premio} </div>
+						<div className={styles.last}> <p className={Utils.isInScadenza(veicolo.polizze[0].scadenza) ? styles.red : styles.green}> {veicolo.polizze[0].scadenza} </p> </div>
 					</div>
 				</Link>
 			))}
