@@ -90,7 +90,7 @@ const ClienteDetailsPage = () => {
     }, []);
     
     
-    // Local Spring Boot Fetch
+    // Fetch Local Spring Boot
     // try {
     //     // fetch data
     //     const response = await fetch(`http://localhost:8080/api/v1/spring-project/heets/findAll`);
@@ -120,7 +120,7 @@ const ClienteDetailsPage = () => {
                 {/* Left Panel */}
                 <div className={styles.container_left}>
                     <div className={styles.overview_panel}>
-                        <img src={Utils.getImageByTipo(cliente.tipo)} alt="img" />
+                        <img src={Utils.getImageByTipo(cliente.tipo, Utils.size.BIG)} alt="img" />
                         <h1 className={styles.overview_name}> {Utils.getValueByColumn(cliente, Utils.columns.NOME_RAGSOCIALE)} </h1>
                     </div>
                 </div>

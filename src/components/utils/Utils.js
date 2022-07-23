@@ -14,9 +14,6 @@ import imgAutocarroBig from "assets/veicolo_autocarro_big.jpg";
 import imgCiclomotoreSmall from "assets/veicolo_ciclomotore_small.jpg";
 import imgCiclomotoreBig from "assets/veicolo_ciclomotore_big.jpg";
 
-// img autocarro
-
-
 // Libraries
 import moment from "moment";
 
@@ -58,7 +55,7 @@ Utils.columns = {
     // generic
     TIPO: "Tipo",
     // multivalue
-    NOME_RAGSOCIALE: "Nome/Ragione Sociale",
+    NOME_RAGSOCIALE: "Nome/Rag.Sociale",
     MARCA_MODELLO: "Marca/Modello",
     // cliente_persona
     CF: "Codice Fiscale",
@@ -91,8 +88,7 @@ Utils.columns = {
 // Functions
 // ----------------------------------------------------------------------------------------------------
 
-// Used to get json field/fields from selected column table
-// Utilizzato per mappare le colonne con i campi json (a volte una colonna corrisponde a più campi)
+// Utilizzato per mappare colonne a campi json (a volte una colonna corrisponde a più campi)
 Utils.getJsonFieldByColumn = function (column) {
     switch (column) {
         // generic
@@ -153,13 +149,29 @@ Utils.getJsonFieldByColumn = function (column) {
     }
 };
 
-// Used to get unified value from json fields to allow data comparison
-Utils.getValueByColumn = function (record, column) {
+// Date: Check date validity
+Utils.isValidDate = function (dateObject) {
+    return dateObject && dateObject.toString() !== "Invalid Date";
+};
 
+// Date: Used to get JS date object to allow comparison (date format required: DD/MM/YYYY)
+Utils.getDateFromString = function (dateString) {
+    try {
+        const [day, month, year] = dateString.split("/");
+        const date = new Date(year, month-1, day); // the month is 0-indexed
+        return date;
+    } catch (error) {
+        return "Invalid Date";
+    }      
+};
+
+// Value: Used to get unified value from json fields to allow data comparison
+Utils.getValueByColumn = function (record, column) {
+    
     // get field/fields
     const field = Utils.getJsonFieldByColumn(column);
-
-    // multiple fields: get unified value summing fields
+    
+    // case multiple fields: get unified value summing foreach field
     if (Array.isArray(field)) {
         let value = "";
         field.map((singleField) =>
@@ -167,98 +179,108 @@ Utils.getValueByColumn = function (record, column) {
         );
         return value;
     }
-
-    // date: get JS date object formatted to allow comparison
-    if (moment(record[field], "DD/MM/YYYY").isValid()) {
-        return new Date(moment(record[field], "DD/MM/YYYY").format("YYYY-MM-DD"));
+    
+    // case date: get JS date object
+    const date = Utils.getDateFromString(record[field]);
+    if (Utils.isValidDate(date)) {
+        return date;
     }
-
+    
     // generic value
     return record[field];
 };
 
-// Used in tables for searching by keyword on specified column
+// Filter: Used in tables for searching by keyword on specified column
 Utils.getFilteredList = function (list, keyword, column) {
+    // check
     if (!list || list.length === 0 || !keyword || !column) {
         return list;
     }
+    // filter converting to string
     return [...list].filter((record) => {
-        const value = Utils.getValueByColumn(record, column)
-        return value.toLowerCase().includes(keyword.toLowerCase());
+        const value = Utils.getValueByColumn(record, column);
+        return value.toString().toLowerCase().includes(keyword.toLowerCase());
     });
 };
 
-// Used in tables for sorting by selected column and direction
+// Sort: Used in tables for sorting by selected column and direction
 Utils.getSortedList = function (list, column, direction) {
-
+    // check
     if (!list || list.length === 0 || !column || !direction) {
         return list;
     }
-
-    // sort
+    // sort for all data types
     list = [...list].sort((a, b) => {
         let valueA = Utils.getValueByColumn(a, column);
         let valueB = Utils.getValueByColumn(b, column);
         return valueA < valueB ? -1 : 1;
     });
-
-    // if tipo reverse
+    // if column tipo: reverse
     if (column === Utils.columns.TIPO) {
         list = [...list].reverse();
     }
-
-    // if decr order
+    // if direction decr: reverse
     if (direction === Utils.direction.DECR) {
         list = [...list].reverse();
     }
     return list;
 };
 
-// Used to get correct image by tipo and size (default size: big)
-Utils.getImageByTipo = function (tipo, size = Utils.size.BIG) {
+// Image: Used to get correct image by tipo and size (default size: small)
+Utils.getImageByTipo = function (tipo, size = Utils.size.SMALL) {
     switch (tipo) {
         // cliente
         case Utils.tipo.CLIENTE_PERSONA:
-            return size ? imgPersonaBig : imgPersonaSmall;
+            return size === Utils.size.SMALL ? imgPersonaSmall : imgPersonaBig;
         case Utils.tipo.CLIENTE_AZIENDA:
-            return size ? imgAziendaBig : imgAziendaSmall;
+            return size === Utils.size.SMALL ? imgAziendaSmall : imgAziendaBig;
         // polizza
-        case Utils.tipo.POLIZZA_VITA: // TODO
-            return size ? imgCiclomotoreBig : imgCiclomotoreSmall;
-        case Utils.tipo.POLIZZA_PREVIDENZA: // TODO
-            return size ? imgCiclomotoreBig : imgCiclomotoreSmall;
+        // TODO ****************************
+        case Utils.tipo.POLIZZA_VITA:
+            return size === Utils.size.SMALL ? imgCiclomotoreSmall : imgCiclomotoreBig;
+        // TODO ****************************
+        case Utils.tipo.POLIZZA_PREVIDENZA:
+            return size === Utils.size.SMALL ? imgCiclomotoreSmall : imgCiclomotoreBig;
         // veicolo
         case Utils.tipo.VEICOLO_AUTOVETTURA:
-            return size ? imgAutovetturaBig : imgAutovetturaSmall;
+            return size === Utils.size.SMALL ? imgAutovetturaSmall : imgAutovetturaBig;
         case Utils.tipo.VEICOLO_AUTOCARRO:
-            return size ? imgAutocarroBig : imgAutocarroSmall;
+            return size === Utils.size.SMALL ? imgAutocarroSmall : imgAutocarroBig;
         case Utils.tipo.VEICOLO_CICLOMOTORE:
-            return size ? imgCiclomotoreBig : imgCiclomotoreSmall;
+            return size === Utils.size.SMALL ? imgCiclomotoreSmall : imgCiclomotoreBig;
         default:
             return null;
     }
 };
 
-// Used to check Scadenze
-Utils.isInScadenza = function (stringDataScadenza) {
-    // controlla formato data
-    if (moment(stringDataScadenza, "DD/MM/YYYY").isValid()) {
-        const dataScadenza = new Date(moment(stringDataScadenza, "DD/MM/YYYY").format("YYYY-MM-DD"));
-        const dataScadenzaMenoGiorniDiAvviso = new Date(moment(dataScadenza).subtract(Utils.giorniDiAvviso, "days"));
-        const oggi = new Date();
-        // const oggiPiuGiorniDiAvviso = new Date(moment(oggi).add(Utils.giorniDiAvviso, "days"));
-        // | dataScadenza >= oggi                  |     non scaduta | FALSE |
-        // | dataScadenza >= oggiPiuGiorniDiAvviso | non in scadenza | FALSE |
-        // | dataScadenza <  oggi                  |         scaduta | TRUE  |
-        // | dataScadenza <  oggiPiuGiorniDiAvviso |     in scadenza | TRUE  |
-        return oggi >= dataScadenzaMenoGiorniDiAvviso;
+// Scadenza: Used to check Scadenze
+Utils.isInScadenza = function (dataScadenzaString) {
+    // |---------------------------------------|-----------------|-------|
+    // | dataScadenza >= oggi                  |     non scaduta | FALSE |
+    // | dataScadenza >= oggiPiuGiorniDiAvviso | non in scadenza | FALSE |
+    // | dataScadenza <  oggi                  |         scaduta |  TRUE |
+    // | dataScadenza <  oggiPiuGiorniDiAvviso |     in scadenza |  TRUE |
+    // |---------------------------------------|-----------------|-------|
+    // // OLD VERSION
+    // // controlla formato data
+    // if (moment(stringDataScadenza, "DD/MM/YYYY").isValid()) {
+    //     const dataScadenza = new Date(moment(stringDataScadenza, "DD/MM/YYYY").format("YYYY-MM-DD"));
+    //     const dataScadenzaMenoGiorniDiAvviso = new Date(moment(dataScadenza).subtract(Utils.giorniDiAvviso, "days"));
+    //     const oggi = new Date();
+    //     return oggi >= dataScadenzaMenoGiorniDiAvviso;
+    // }
+    const dataScadenza = Utils.getDateFromString(dataScadenzaString);
+    if (!Utils.isValidDate(dataScadenza)) {
+        throw new Error("Data Scadenza is Invalid date!");
     }
+    const dataScadenzaMenoGiorniDiAvviso = new Date(moment(dataScadenza).subtract(Utils.giorniDiAvviso, "days"));
+    const oggi = new Date();
+    return oggi >= dataScadenzaMenoGiorniDiAvviso;
 };
-
-// Used only for Tables to handle behaviour of selecting Columns or Direction
+    
+// SortOrder: Used only for Tables to handle behaviour of selecting Columns or Direction
 // previous function name: setColumnAndDirection
 Utils.getChangedColumnAndDirection = function (newColumn, prevColumn, prevDirection) {
-
     // different column: change column and reset direction
     if (newColumn !== prevColumn) {
         return {
@@ -266,7 +288,6 @@ Utils.getChangedColumnAndDirection = function (newColumn, prevColumn, prevDirect
             direction: Utils.direction.INCR
         };
     }
-
     // same column: change direction
     let newDirection;
     switch (prevDirection) {
@@ -282,12 +303,11 @@ Utils.getChangedColumnAndDirection = function (newColumn, prevColumn, prevDirect
         default:
             break;
     }
-
     return {
         column: prevColumn,
         direction: newDirection
     };
-}
+};
 
 
 

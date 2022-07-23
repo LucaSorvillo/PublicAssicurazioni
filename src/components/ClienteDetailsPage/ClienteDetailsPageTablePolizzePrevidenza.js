@@ -20,8 +20,8 @@ const ClienteDetailsPageTablePolizzePrevidenza = ({ list }) => {
 
 	function changeSortOrder(newColumn) {
 		// Utils.getChangedColumnAndDirection(newColumn, prevColumn, prevDirection)
-		const updatedSordOrder = Utils.getChangedColumnAndDirection(newColumn, sortOrder.column, sortOrder.direction);
-		setSortOrder(updatedSordOrder);
+		const updatedSortOrder = Utils.getChangedColumnAndDirection(newColumn, sortOrder.column, sortOrder.direction);
+		setSortOrder(updatedSortOrder);
 	}
 
 	const polizzePrevidenza = Utils.getSortedList(list, sortOrder.column, sortOrder.direction);
@@ -72,7 +72,7 @@ const ClienteDetailsPageTablePolizzePrevidenza = ({ list }) => {
 			{polizzePrevidenza.map((polizza) => (
 				<Link to={`/polizze/${polizza.id}`} key={polizza.id}>
 					<div className={`${styles.row}  ${Utils.isInScadenza(polizza.scadenza) ? styles.row_red : styles.row_green}`}>
-						<div className={styles.thumbnail}> <img src={Utils.getImageByTipo(polizza.tipo, Utils.size.SMALL)} alt="img" /> </div>
+						<div className={styles.thumbnail}> <img src={Utils.getImageByTipo(polizza.tipo)} alt="img" /> </div>
 						<div className={styles.first}> {polizza.polizza} </div>
 						<div className={styles.medium}> {polizza.compagnia} </div>
 						<div className={styles.medium}> € {polizza.premio} </div>
