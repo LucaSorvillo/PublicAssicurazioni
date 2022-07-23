@@ -1,21 +1,26 @@
+
+/* Padre delle classi stile css,
+ha un fratello DetailsPage.module.css,
+ha un figlio Table.module.css */
+
 /* ------------- Container ------------- */
 .container {
-    padding: 24px;
-    height: 100vh;
-
     display: grid;
     grid-template-rows: auto 1fr auto;
-
-    max-width: 1100px;
+    
     margin: 0 auto;
+    padding: 24px;
+    height: 100vh;
+    max-width: 1100px;
+
 }
 
 
-.inputContainer {
+.searchContainer {
     margin-bottom: 40px;
 }
 
-.counts {
+.title {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -28,16 +33,18 @@
 
 /* ------------- Smartphone ------------- */
 @media screen and (min-width: 720px) {
-    .inputContainer {
+    
+    .searchContainer {
         display: flex;
         justify-content: space-between;
     }
 
-    .counts {
+    .title {
         flex: 1;
     }
 
     .input {
         flex: 2;
     }
+    
 }

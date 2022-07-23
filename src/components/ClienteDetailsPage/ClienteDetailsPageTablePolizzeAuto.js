@@ -20,8 +20,8 @@ const ClienteDetailsPageTablePolizzeAuto = ({ list }) => {
 
 	function changeSortOrder(newColumn) {
 		// Utils.getChangedColumnAndDirection(newColumn, prevColumn, prevDirection)
-		const updatedSordOrder = Utils.getChangedColumnAndDirection(newColumn, sortOrder.column, sortOrder.direction);
-		setSortOrder(updatedSordOrder);
+		const updatedSortOrder = Utils.getChangedColumnAndDirection(newColumn, sortOrder.column, sortOrder.direction);
+		setSortOrder(updatedSortOrder);
 	}
 
 	const veicoliConPolizze = Utils.getSortedList(list, sortOrder.column, sortOrder.direction);	
@@ -82,7 +82,7 @@ const ClienteDetailsPageTablePolizzeAuto = ({ list }) => {
 			{veicoliConPolizze.map((veicolo) => (
 				<Link to={`/veicoli/${veicolo.id}`} key={veicolo.id}>
 					<div className={`${styles.row}  ${Utils.isInScadenza(veicolo.polizze[0].scadenza) ? styles.row_red : styles.row_green}`}>
-						<div className={styles.thumbnail}> <img src={Utils.getImageByTipo(veicolo.tipo, Utils.size.SMALL)} alt="img" /> </div>
+						<div className={styles.thumbnail}> <img src={Utils.getImageByTipo(veicolo.tipo)} alt="img" /> </div>
 						<div className={styles.first}> {veicolo.targa} </div>
 						<div className={styles.medium}> {Utils.getValueByColumn(veicolo, Utils.columns.MARCA_MODELLO)} </div>
 						<div className={styles.medium}> {veicolo.polizze[0].polizza} </div>

@@ -19,10 +19,10 @@ import polizzeJSON from "assets/polizze.json";
 // MainPage: Elenco clienti con polizza più vicina alla scadenza
 const MainPage = () => {
 
-    const [keyword, setKeyword] = useState("");
     const [result, setResult] = useState([]);
-
+    
     // search
+    const [keyword, setKeyword] = useState("");
     const handleChange = (event) => {
         event.preventDefault();
         setKeyword(event.target.value.toLowerCase());
@@ -47,7 +47,7 @@ const MainPage = () => {
                 return { ...cliente, polizza };
             });
             setResult(clientiConPolizzaPiuScadente);
-
+            // Example result row: { id: 1, nome: "Mario", cognome: "Rossi", ... , polizza: { id: 1, scadenza: "2020-01-01" } }
         })();
     }, []);
 
@@ -61,11 +61,9 @@ const MainPage = () => {
 
         <div className={styles.container}>
 
-            <div className={styles.inputContainer}>
-                <div className={styles.counts}> Home </div>
-                <div className={styles.input}>
-                    <SearchInput placeholder={`Cerca per ${Utils.columns.NOME_RAGSOCIALE}`} onChange={handleChange} />
-                </div>
+            <div className={styles.searchContainer}>
+                <div className={styles.title}> Home </div>
+                <div className={styles.input}> <SearchInput placeholder={`Cerca per ${Utils.columns.NOME_RAGSOCIALE}`} onChange={handleChange} /> </div>
             </div>
 
             <ClienteTable list={resultFiltered} />

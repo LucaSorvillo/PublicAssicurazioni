@@ -29,7 +29,7 @@ const ClientiPage = () => {
     // get filtered list
     const clientiFiltered = Utils.getFilteredList(clienti, keyword, Utils.columns.NOME_RAGSOCIALE);
 
-    // Mock Fetch (CLIENTI + POLIZZE)
+    // Mock
     useEffect(() => {
         (async () => {
             setClienti(clientiJSON);
@@ -41,8 +41,8 @@ const ClientiPage = () => {
 
         <div className={styles.container}>
 
-            <div className={styles.inputContainer}>
-                <div className={styles.counts}> Clienti </div>
+            <div className={styles.searchContainer}>
+                <div className={styles.title}> Clienti </div>
                 <div className={styles.input}> <SearchInput placeholder={`Cerca per ${Utils.columns.NOME_RAGSOCIALE}`} onChange={handleChange} /> </div>
             </div>
 

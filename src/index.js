@@ -1,6 +1,9 @@
+// react
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+// inject style
 import './index.css';
+// root component
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 

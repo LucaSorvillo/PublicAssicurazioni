@@ -1,12 +1,16 @@
+/* ------------- Wrapper per ogni Page ------------- */
+.container {
+    padding: 24px;
+    height: 100vh;
 
+    display: grid;
+    grid-template-rows: auto 1fr auto;
 
-/* Eredita Container da ListPage.module.css */
+    max-width: 1100px;
+    margin: 0 auto;
+}
 
-/* -------------------------------------------------- */
-/* Head Table */
-/* -------------------------------------------------- */
-
-/* Container Heading */
+/* ------------- Head Table ------------- */
 .heading {
     display: flex;
     justify-content: center;
@@ -17,7 +21,6 @@
     font-weight: 500;
 }
 
-/* Container Button */
 .heading button {
     border: none;
     background-color: transparent;
@@ -26,7 +29,7 @@
 }
 
 
-/* Columns */
+/* All Columns */
 .heading_thumbnail,
 .heading_first,
 .heading_medium,
@@ -37,7 +40,7 @@
     flex: 4;
 }
 
-/* Column Thumbnail (Image) */
+/* Image */
 .heading_thumbnail {
     flex: 1;
     /* margin-right: 1px; */
@@ -45,20 +48,20 @@
     margin-right: 13px;
 }
 
-/* Column First */
+/* First Column */
 .heading_first {
     text-align: left;
     justify-content: flex-start;
 }
 
-/* Column Last */
+/* Last Column */
 .heading_last {
     text-align: right;
     justify-content: flex-end;
 }
 
 
-/* Arrow */
+
 .sort_arrow {
     display: flex;
     justify-content: center;
@@ -69,11 +72,7 @@
 }
 
 
-/* -------------------------------------------------- */
-/* Body Table */
-/* -------------------------------------------------- */
-
-/* Container Row */
+/* ------------- Body Table ------------- */
 .row {
     display: flex;
     padding: 20px;
@@ -81,8 +80,7 @@
 
     font-weight: 500;
     
-    margin-bottom: 16px; /* PERCHE'? */
-    
+    margin-bottom: 16px;
     background-color: var(--background-color-light);
     border-radius: 8px;
     box-shadow: var(--box-shadow);
@@ -95,7 +93,10 @@
 }
 
 
-/* Columns */
+
+
+/* ------------- Data Body Table ------------- */
+/* All Columns */
 .thumbnail,
 .first,
 .medium,
@@ -106,7 +107,7 @@
     flex: 4;
 }
 
-/* Column Thumbnail (Image) */
+/* Image */
 .thumbnail {
     flex: 1;
     margin-right: 16px;
@@ -117,20 +118,21 @@
     max-height: 100px;
 }
 
-/* Column First */
+/* First Column */
 .first {
     text-align: left;
     justify-content: flex-start;
 }
 
-/* Column Last */
+/* Last Column */
 .last {
     text-align: right;
     justify-content: flex-end;
 }
 
 
-/* Colors */
+
+/* ------------- Colors ------------- */
 .row_green {
     background-image: linear-gradient(to right, rgb(255, 255, 255), rgba(143, 255, 154, 0.52));
 }
@@ -148,23 +150,21 @@
 }
 
 
-/* -------------------------------------------------- */
-/* Smartphone viewport */
-/* -------------------------------------------------- */
+/* ------------- Smartphone ------------- */
 @media screen and (max-width: 720px) {
     
-    .heading_thumbnail,
-    .thumbnail {
+    .thumbnail,
+    .heading_thumbnail {
         display: none;
     }
     
-    .heading_medium,
-    .medium {
+    .medium,
+    .heading_medium {
         display: none;        
     }
 
-    .heading_last,
-    .last {
+    .last,
+    .heading_last {
         padding-left: 0;
     }
     

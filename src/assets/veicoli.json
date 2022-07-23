@@ -3,7 +3,7 @@
         "id": 1,
         "tipo": "veicolo_autovettura",
         
-        "targa": "AA-AA-AA",
+        "targa": "AA123AA",
         "marca": "Fiat",
         "modello": "Punto",
         
@@ -13,7 +13,7 @@
         "id": 2,
         "tipo": "veicolo_ciclomotore",
         
-        "targa": "BB-AA-AA",
+        "targa": "BB123BB",
         "marca": "Yamaha",
         "modello": "YZF-R6",
         
@@ -23,7 +23,7 @@
         "id": 3,
         "tipo": "veicolo_autocarro",
         
-        "targa": "BB-AA-AA",
+        "targa": "CC123CC",
         "marca": "Iveco",
         "modello": "Eurocargo",
         
@@ -33,7 +33,7 @@
         "id": 4,
         "tipo": "veicolo_autovettura",
         
-        "targa": "DD-AA-AA",
+        "targa": "DD123DD",
         "marca": "Mercedes",
         "modello": "ClasseA",
         
@@ -43,7 +43,7 @@
         "id": 5,
         "tipo": "veicolo_ciclomotore",
         
-        "targa": "EE-AA-AA",
+        "targa": "EE123EE",
         "marca": "Suzuki",
         "modello": "GSX-R1000",
         
@@ -53,7 +53,7 @@
         "id": 6,
         "tipo": "veicolo_autovettura",
         
-        "targa": "FF-AA-AA",
+        "targa": "FF123FF",
         "marca": "Lancia",
         "modello": "Y",
         
@@ -63,7 +63,7 @@
         "id": 7,
         "tipo": "veicolo_autovettura",
         
-        "targa": "GG-AA-AA",
+        "targa": "GG123GG",
         "marca": "Alfa Romeo",
         "modello": "Giulietta",
         
@@ -73,7 +73,7 @@
         "id": 8,
         "tipo": "veicolo_autovettura",
         
-        "targa": "HH-AA-AA",
+        "targa": "HH123HH",
         "marca": "Jeep",
         "modello": "Renegade",
         
@@ -83,7 +83,7 @@
         "id": 9,
         "tipo": "veicolo_autovettura",
         
-        "targa": "II-AA-AA",
+        "targa": "II123II",
         "marca": "Citroen",
         "modello": "C3",
         
@@ -93,7 +93,7 @@
         "id": 10,
         "tipo": "veicolo_autovettura",
         
-        "targa": "CC-AA-AA",
+        "targa": "LL123LL",
         "marca": "Dacia",
         "modello": "Sandero",
         
@@ -103,7 +103,7 @@
         "id": 11,
         "tipo": "veicolo_autovettura",
         
-        "targa": "CC-AA-AA",
+        "targa": "MM123MM",
         "marca": "Toyota",
         "modello": "Yaris",
         

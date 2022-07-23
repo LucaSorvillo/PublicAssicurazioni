@@ -15,12 +15,10 @@ import RicercaPage from "components/RicercaPage/RicercaPage";
 import ClienteDetailsPage from "components/ClienteDetailsPage/ClienteDetailsPage";
 import WrongPage from "components/WrongPage";
 
-// Styles
-import "./App.css";
 
 function App() {
 	return (
-		<div className="App">
+		<div>
 			<Router>
 				<Navbar />
 				<ScrollToTop />
