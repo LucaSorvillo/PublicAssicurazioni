@@ -3,7 +3,7 @@ import { React, useEffect, useState } from "react";
 
 // Components
 import SearchInput from "components/other/SearchInput";
-import ClienteTable from "components/MainPage/MainPageTable";
+import MainPageTable from "components/MainPage/MainPageTable";
 
 // Libraries
 import Utils from "components/utils/Utils";
@@ -66,7 +66,7 @@ const MainPage = () => {
                 <div className={styles.input}> <SearchInput placeholder={`Cerca per ${Utils.columns.NOME_RAGSOCIALE}`} onChange={handleChange} /> </div>
             </div>
 
-            <ClienteTable list={resultFiltered} />
+            <MainPageTable list={resultFiltered} />
 
         </div>
 
