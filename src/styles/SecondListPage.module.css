@@ -6,7 +6,8 @@ ha un figlio Table.module.css */
 /* ------------- Container ------------- */
 .container {
     display: grid;
-    grid-template-rows: auto 1fr auto;
+    /* grid-template-rows: auto 1fr auto; */
+    grid-template-rows: repeat(auto-fit, minmax(1px, 130px));
     
     margin: 0 auto;
     padding: 24px;
@@ -21,16 +22,32 @@ ha un figlio Table.module.css */
 }
 
 .title {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    /* display: flex; */
+    /* justify-content: space-between; */
+    /* align-items: center; */
     
     color: black;
     font-size: 2rem;
+    margin: 0 0 0 0;
+    /* margin-bottom: 0px; */
 }
 
 .input {
-    margin-top: 20px;
+    /* margin-top: 20px; */
+    /* margin: 0 0 0 0; */
+    /* margin-bottom: 16px; */
+    /* height: 0.1px; */
+    
+}
+
+.grid {
+    margin-top: 0px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    /* grid-gap: 10px; */
+    gap: 15px;
+    margin-top: 0px;
+    margin-bottom: 20px;
 }
 
 
